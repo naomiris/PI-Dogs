@@ -41,11 +41,11 @@ const dogsByNames = async (req, res)=>{
         return{
             id: d.id,
             name: d.name,
-            height: d.height,
-            weight: d.weight,
+            height: d.height.metric,
+            weight: d.weight.metric,
             temperament: d.temperament,
             life_span: d.life_span,
-            image: d.image
+            image: d.image.url
         }
     })
     let finDogs = await dataBInfo();
@@ -90,13 +90,14 @@ const findDogById = async(req, res)=>{
 }
 
 const createDogs = async(req, res)=>{
-    const { name, height, weight, temperament, life_span } = req.body;
+    const { name, height, weight, temperament, life_span, image} = req.body;
 
     const newDog = await Dog.create({
         name,
         height,
         weight,
-        life_span
+        life_span,
+        image
     })
     const Temperamento = await Temperament.findAll({
         where: {name:temperament}

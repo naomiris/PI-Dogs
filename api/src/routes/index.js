@@ -8,10 +8,10 @@ const { dogsTemperament } = require('../controllers/temperament.controller');
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.get('/dogs', findDogs);
-router.get('/:id', findDogById);
-router.get('/dogs/:name', dogsByNames);
+router.get('/temperaments', dogsTemperament);
+router.get('/dogs/:id', findDogById);
 router.post('/dog', createDogs);
+router.get('/dogs/:name', dogsByNames);
 
-router.get('/temperament', dogsTemperament);
 
 module.exports = router;
