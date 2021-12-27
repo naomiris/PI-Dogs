@@ -1,18 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import perrologo from './images/perrologo.png'
-import styles from './styles/NavBar.module.css'
+import perro from './images/perro.png';
+import styles from './styles/NavBar.module.css';
 
 export default function NavBar (){
     return(
-        <nav className={styles.nav}>
-            <Link to="/dog">Create Dog</Link>
-            <Link to='/home'>
-            <div>
-                <img src={perrologo} id="perrologo" alt="" width="30" height="30"/>
-            </div>
-            </Link>
-        </nav>
+      
+            <nav >
+                <div className={styles.nav}>
+                <Link to="/">
+                    <div className={styles.home}>
+                <img src={perro} id="perrologo" alt="" width='60px' height='30px'/>
+                </div>
+                </Link>
+                <Link to='/home'>
+                <h1 className={styles.doggy}>Doggy App</h1>
+                </Link>
+                <div>
+                <Link to='/dog'><h1 className={styles.createdog}>Create your dog!</h1></Link>
+                </div>
+                </div>
+            </nav>
+     
     )
-    
 }

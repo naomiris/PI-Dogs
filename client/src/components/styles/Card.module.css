@@ -11,11 +11,11 @@
    justify-content: center;
    height: 80vh;
    align-items: center; 
-   margin-top: 0px;
+   margin-top: 10px;
 
 }
 .card{
-    /* border-radius: 1rem; */
+    border-radius: 1rem;
     box-shadow: 0 1rem 1rem rgba(0,0,0,0,2);
     display: flex;
     flex-direction: column;
@@ -24,9 +24,9 @@
     overflow:hidden;
     width:15rem;
     backdrop-filter: blur(.10rem);
-    background-color: rgba(194, 194, 194, 0.12);
+    background-color: rgba(245, 243, 243, 0.767);
     /* border: 1rem solid rgba(255, 255, 255, 0.120); */
-    border: .10rem solid rgba(161, 161, 161, 0.12);
+    border: .10rem solid rgba(212, 212, 212, 0.897);
     color: var(--white-text);
 }
 .card h2{
@@ -47,23 +47,27 @@
     align-items: flex-start;
     justify-content: space-between;
 }
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@1,300&display=swap');
+
 .name{
+    font-family: 'Source Serif Pro', serif;
     font-size: 20px;
     letter-spacing: .1rem;
-    font-style: italic;
-    color: rgb(226, 188, 117);
+    color: rgb(26, 19, 19);
 }
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital@1&display=swap');
+
 .temp{
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: .1rem;
-    font-style:oblique;
-    color: rgb(255, 239, 195);  
+    color: rgb(12, 9, 9);  
+    font-family: 'Arimo', sans-serif;
 }
 .weight{
     font-size: 13px;
     letter-spacing: .1rem;
-    font-style:oblique;
-    color: rgb(255, 239, 195);  
+    color: rgb(15, 10, 10); 
+    font-family: 'Arimo', sans-serif; 
 }
 .container:hover{
     transform: scale(1.1);

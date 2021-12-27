@@ -1,0 +1,59 @@
+/* .contenedor{
+    background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Ffotografia-y-video%2Festas-son-algunas-de-las-mejores-fotos-de-perros-que-vais-a-ver-este-ano-tambien-algunos-de-los-canes-mas-feos&psig=AOvVaw2Z74_fxHtXGxJDmxy6LIn0&ust=1640194626988000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNC4hqW39fQCFQAAAAAdAAAAABAD");
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: absolute;
+    margin-top: -32px;
+    justify-content: center;
+
+} */
+
+.contenedor{
+    background-color: aliceblue;
+}
+
+.container{
+    border-radius: 1rem;
+    box-shadow: 0 1rem 1rem rgba(0,0,0,0,2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 32rem;
+    margin: 1.9rem;
+    overflow:hidden;
+    width:31rem;
+    backdrop-filter: blur(.10rem);
+    background-color: rgba(255, 255, 255, 0.856);
+    border: .10rem solid rgba(43, 43, 43, 0.897);
+    color: var(--white-text);
+    margin-left: 360px;
+    margin-top: 40px;
+    
+}
+@import url('https://fonts.googleapis.com/css2?family=Moo+Lah+Lah&family=Noto+Sans+Display:wght@200&display=swap');
+.name{
+    font-family: 'Noto Sans Display', sans-serif;
+    font-size: 15px;
+}
+.temp{
+    font-family: 'Noto Sans Display', sans-serif;
+    font-size: 17px;
+    font-weight: bolder;
+    color: rgb(0, 0, 0);
+}
+.button{
+    width: 100px;
+    height: 50px;
+    border: none;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 254, 254);
+    border-radius: 4px;
+    box-shadow: inset rgb(121, 98, 98);
+    transition: ease-out 0.3s;
+    font-size: 15px;
+    outline: none;
+    margin-top: -140px;
+}

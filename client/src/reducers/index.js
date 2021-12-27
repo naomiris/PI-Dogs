@@ -26,7 +26,7 @@ function rootReducer(state = initialState, action) {
     case "FILTER_BY_TEMPERAMENTS":
       const allDogs = state.allDogs;
       const temperamentFiltered =
-        action.payload === "All"
+        action.payload === "Temperaments"
           ? allDogs
           : allDogs.filter(
               (el) =>
@@ -38,11 +38,19 @@ function rootReducer(state = initialState, action) {
         ...state,
         dogs: temperamentFiltered,
       };
+      case 'FILTER_BY_DBAPI':
+          const createdFilter = action.payload ==='Created' ? state.allDogs.filter(el => el.createdInDb) : 
+          state.allDogs.filter(el => !el.createdInDb)
+          console.log('aca',createdFilter)
+          return{
+              ...state,
+              dogs: createdFilter
+          }
     case "ORDER_BY_NAME":
       let arr =
         action.payload === "asc"
           ? state.dogs.sort(function (a, b) {
-              if (a.name > b.name) {
+              if (a.name > b.name) {  
                 return 1;
               }
               if (b.name > a.name) {
@@ -72,6 +80,32 @@ function rootReducer(state = initialState, action) {
             ...state,
             dogsDetail: action.payload
           }
+          case "ORDER_BY_WEIGHT":
+            let array =
+            action.payload === "ascWeight"
+              ? state.dogs.sort(function (a, b) {
+                  if (a.weight_min > b.weight_min) {
+                    return 1;
+                  }
+                  if (b.weight_min > a.weight_min) {
+                    return -1;
+                  }
+                  return 0;
+                })
+              : state.dogs.sort(function (a, b) {
+                  if (a.weight_min > b.weight_min) {
+                    return -1;
+                  }
+                  if (b.weight_min > a.weight_min) {
+                    return 1;
+                  }
+                  return 0;
+                });
+          return {
+            ...state,
+            dogs: array,
+          };
+            
 
 
     default:

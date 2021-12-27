@@ -20,18 +20,37 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    height: {
+    height_max: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    weight: {
+    height_min: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    weight_max: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    weight_min: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     life_span: {
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+    img: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: 'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg'
+    },
+    createdInDb: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: true,
     }
+
   },
   
   {

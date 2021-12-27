@@ -1,0 +1,116 @@
+.contenedor{
+    border-radius: 1rem;
+    box-shadow: 0 1rem 1rem rgba(0,0,0,0,2);
+    display: flex;
+    justify-content: center;
+    margin-left: 400px;
+    margin-top: 50px;
+    flex-direction: column;
+    height: 25rem;
+    overflow:hidden;
+    width:30rem;
+    backdrop-filter: blur(.10rem);
+    background-color: rgba(245, 243, 243, 0.767);
+    /* border: 1rem solid rgba(255, 255, 255, 0.120); */
+    border: .10rem solid rgba(212, 212, 212, 0.897);
+    color: var(--white-text);
+    
+}
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+.titulo{
+    margin-top: -20px;
+    padding-bottom: 20px;
+    font-family: 'Lobster', cursive;
+}
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap');
+
+.image{
+    font-family: 'Gothic A1', sans-serif;
+    margin-left: -30px;
+}
+.inputImage{
+    padding: 3px;
+    border-radius: 3px;
+    margin-top: 6px;
+    margin-bottom: 5px;
+}
+.name{
+    font-family: 'Gothic A1', sans-serif;
+    padding: 4px;
+    margin-left: -30px;
+}
+.temperament{
+    font-family: 'Gothic A1', sans-serif;
+    padding: 1px;
+   margin-left: -96px;
+   cursor: pointer;
+}
+.li{
+    border: 1px solid;
+    list-style: none;
+    border-radius: 2px;
+    font-family: 'Gothic A1', sans-serif;
+    padding: 2px;
+    background-color: rgb(235, 225, 225);
+    margin-left: 2px;
+}
+.weight{
+    font-family: 'Gothic A1', sans-serif;
+    padding: 4px;
+    margin-left: -49px;
+   
+}
+.height{
+    font-family: 'Gothic A1', sans-serif;
+    padding: 5px;
+    margin-left: -77px;
+}
+.life_span{
+    font-family: 'Gothic A1', sans-serif;
+    padding: 4px;
+    margin-left: -25px;
+    margin-left: -25px;
+}
+.boton{
+    border: 1px solid rgb(148, 114, 114);
+    border-radius: 2px;
+    width: 120px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    margin-left: 190px;
+    margin-top: 25px;
+    background-color: rgb(199, 175, 175);
+    font-family: 'Gothic A1', sans-serif;
+    cursor: pointer;
+    
+}
+.boton:hover{
+    transform: scale(1.2);
+    color: white;
+}
+/* .danger{
+    color:red;
+      font-size: 12px;
+} */
+input.danger{
+      border: 1px solid red;
+}
+input:invalid {
+    border: 1px dashed red;
+}
+
+input:valid {
+    border: 1px solid black;
+} 
+.error{
+    font-size: 10px;
+    color: rgb(233, 1, 1);
+}
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+.p{
+    margin-top: 5px;
+    font-family: 'Kanit', sans-serif;
+    color:rgb(119, 20, 20)
+    
+} 

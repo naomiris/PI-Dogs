@@ -3,6 +3,7 @@ const {Dog, Temperament} = require('../db');
 require('dotenv').config();
 const { DB_API_KEY }= process.env
 
+//llamo al endpoint de la api para traerme la info
 const dogsApi = async(req, res)=> {
     try{
       const urlApi = await axios.get(`https://api.thedogapi.com/v1/breeds?apikey=${DB_API_KEY}`)
@@ -10,10 +11,13 @@ const dogsApi = async(req, res)=> {
           return {
               id: i.id,
               name: i.name,
-              height: i.height.metric,
-              weight: i.weight.metric,
+              height_max: i.height.metric.split("-")[1] &&  i.height.metric.split("-")[1],
+              height_min: i.height.metric.split("-")[0] &&  i.height.metric.split("-")[0],
+              weight_max: i.weight.metric.split("-")[1] &&  i.weight.metric.split("-")[1],
+              weight_min: i.weight.metric.split("-")[0] &&  i.weight.metric.split("-")[0],
               temperament: i.temperament,
-              image: i.image.url,
+              img: i.image.url,
+              life_span: i.life_span
           }
       })
       return apiInfo   
@@ -21,12 +25,13 @@ const dogsApi = async(req, res)=> {
       console.log(error);
     }
 };
-
+//Info de la base de datos
 const dataBInfo = async()=>{
-    return await Dog.findAll({
+    console.log(dataBInfo)
+    return await Dog.findAll({  
         include:{
-            model:Temperament,
-            atributes: ['name'],
+            model:Temperament,   
+            attributes: ['name'], 
             through:{
                 atributes:[],
             },
@@ -34,38 +39,40 @@ const dataBInfo = async()=>{
     })
 }
 
-const dogsByNames = async (req, res)=>{
-    const { name } = req.params;
-    const urlApi= await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}`)
-    const apiInfo = await urlApi.data.map(d =>{
-        return{
-            id: d.id,
-            name: d.name,
-            height: d.height.metric,
-            weight: d.weight.metric,
-            temperament: d.temperament,
-            life_span: d.life_span,
-            image: d.image.url
-        }
-    })
-    let finDogs = await dataBInfo();
-    const dBFilterName = finDogs.filter(d => d.name.toLowerCase().includes(name.toLowerCase()))
-
-    const resultInfo = apiInfo.concat(dBFilterName)
-    if (resultInfo.length > 0 ){
-        res.status(200).json(resultInfo)
-    }else{
-        res.json('Dog does not exist');
-    }
-    
-}
-
+//concateno las info
 const infoApiDB = async()=>{
     const apiInfo = await dogsApi();
     const dataBIn = await dataBInfo();
     const finalInfo = apiInfo.concat(dataBIn);
     return finalInfo;
 }
+
+// const dogsByNames = async (req, res)=>{
+//     const { name } = req.params;
+//     const urlApi= await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}`)
+//     const apiInfo = await urlApi.data.map(d =>{
+//         return{
+//             id: d.id,
+//             name: d.name,
+//             height: d.height.metric,
+//             weight: d.weight.metric,
+//             temperament: d.temperament,
+//             life_span: d.life_span,
+//             image: d.image.url
+//         }
+//     })
+//     let finDogs = await dataBInfo();
+//     const dBFilterName = finDogs.filter(d => d.name.toLowerCase().includes(name.toLowerCase()))
+
+//     const resultInfo = apiInfo.concat(dBFilterName)
+//     if (resultInfo.length > 0 ){
+//         res.status(200).json(resultInfo)
+//     }else{
+//         res.json('Dog does not exist');
+//     }
+    
+// }
+
 
 
 const findDogs = async(req, res)=>{
@@ -90,14 +97,17 @@ const findDogById = async(req, res)=>{
 }
 
 const createDogs = async(req, res)=>{
-    const { name, height, weight, temperament, life_span, image} = req.body;
+    const { name, height_max,height_min, weight_max,weight_min, temperament, life_span, createdInDb, img} = req.body;
 
     const newDog = await Dog.create({
         name,
-        height,
-        weight,
+        height_max,
+        height_min,
+        weight_max,
+        weight_min,
         life_span,
-        image
+        createdInDb,
+        img
     })
     const Temperamento = await Temperament.findAll({
         where: {name:temperament}
@@ -107,4 +117,4 @@ const createDogs = async(req, res)=>{
 
 }
 
-module.exports = {findDogById, findDogs, createDogs, dogsByNames}
+module.exports = {findDogById, findDogs, createDogs}

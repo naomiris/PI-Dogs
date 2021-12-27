@@ -12,10 +12,13 @@ function App() {
   return (
     <div className="App">
       <Route exact path='/' render={()=> <LandingPage/>}/>
-      <Route  path='/home' render={()=> <Home/>}/>
-      <Route path='/home' render={()=><NavBar/>} />
+      <Route path='/home' render={()=> <NavBar/>}/>
+      <Route path='/dogs/:id' render={()=> <NavBar/>}/>
+     <Route  exact path='/dogs/:id' render={()=><Details/>}/>
+      <Route exact path='/home' render={()=> <Home/>}/>
+     <Route path='/dog' render={()=> <NavBar/>}/>
      <Route exact path='/dog' render={()=><CreateDog/>}/>
-     <Route  path='/dogs/:id' render={()=><Details/>}/>
+
       
     </div>
   );

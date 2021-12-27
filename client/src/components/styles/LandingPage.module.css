@@ -1,10 +1,26 @@
 .background {
-   background-image: url("https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500") ;
+   /* background-image: url("https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500") ; */
+   background-image: url('C:\Users\naomi\OneDrive\Desktop\PI-Dogs-main\client\src\components\images\perroblanco.webp');
    position: fixed;
-   height: 100%;
+   height:100%;
    width: 100%;
    background-size: cover;
-  background-position: center;
+   background-position: center;
    background-attachment: fixed;
 
   }
+ .imagen{
+    display: flex;
+    justify-content: center;
+    margin-left: 580px;
+    margin-top: -30px; 
+    width: 150px;
+    height: 170px;
+   } 
+ 
+ @import url('https://fonts.googleapis.com/css2?family=Moo+Lah+Lah&display=swap');
+ .doggy{
+    font-family: 'Moo Lah Lah', cursive;
+    font-size: 100px;
+    cursor: default;
+   }
