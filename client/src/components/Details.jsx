@@ -15,7 +15,7 @@ export default function Detail(props) {
     console.log("dogdetalle", dogDetalle);
     useEffect(() => {
         dispatch(dogDetail(id));
-    }, [dispatch]);
+    }, [dispatch, id]);
 
     return (
         <>

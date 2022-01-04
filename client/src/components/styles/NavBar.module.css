@@ -13,7 +13,7 @@
     justify-content: flex-start;
 }  
 .nav{
-    background-color: rgb(219, 202, 202);
+    background-color: rgb(255, 255, 255);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,14 +40,14 @@
 
 }
 .createdog:hover{
-    background-color: rgb(221, 218, 218);
+    background-color: rgb(255, 255, 255);
     color: rgb(37, 36, 36);
     transform: scale(1.2);
-    border-color: aliceblue
+    border-color: rgb(235, 235, 235)
 }
 @import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
 .doggy{
-    color: rgb(75, 74, 74);
+    color: rgb(0, 0, 0);
     justify-content: center;
     display: flex;
     font-family: 'Cinzel', serif;

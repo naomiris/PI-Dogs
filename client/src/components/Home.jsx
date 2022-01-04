@@ -16,30 +16,36 @@ import SearchBar from "./SearchBar.jsx";
 import styles from "./styles/Home.module.css";
 
 export default function Home() {
-    const dispatch = useDispatch();
-
+    const dispatch = useDispatch(); // HOOK que reemplaza mapDispatchToProps, creo una instancia de la funcion 
+ 
+//  ME TRAIGO LOS ESTADOS GLOBALES QUE SE NECESITAN EN ESTE COMPONENTE
     const allDogs = useSelector((state) => state.dogs); // me traigo el arreglo del estado del reducer
     console.log(allDogs);
+    
+    const temperaments = useSelector((state) => state.temperaments);
 
+
+// PAGINADO
     const [orden, setOrden] = useState("");
     const [currentPg, setCurrentPg] = useState(1); // me guarda en un estado local la pagina actual, va a ser 1
     const [dogsPerPg, setDogsPerPg] = useState(8); // me guardo en un estado local cuantos perros por pagina
-    const indexLastDog = currentPg * dogsPerPg; // 8
-    const indexFirstDog = indexLastDog - dogsPerPg; // 0
-    const currentDogs = allDogs.slice(indexFirstDog, indexLastDog); // me devuelve un arreglo desde el primer perro hasta el ultimo que seria el 6to en la primera pag, esto va a cambiar dependiendo de la pagina en el que este
+    const numberOfLastDog = currentPg * dogsPerPg; // 8
+    const numberOfFirstDog = numberOfLastDog - dogsPerPg; // 0
+    const currentDogs = allDogs.slice(numberOfFirstDog, numberOfLastDog); // me devuelve un arreglo desde el primer perro hasta el ultimo que seria el 6to en la primera pag, esto va a cambiar dependiendo de la pagina en el que este
     //slice: de un arreglo toma una porcion de ese arreglo dependiendo de lo que se le pasa por paramentro
-    console.log("aca",currentDogs)
+    // console.log("aca", currentDogs);
 
-    const temperaments = useSelector((state) => state.temperaments);
-
+//PAGINA ACTUAL
     const paginado = (pageNum) => {
         setCurrentPg(pageNum); // el paginado va a ir seteando la pagina en el numero que yo vaya apretando
     };
 
-    //me traigo los perros y los temperamentos cuando el componente se monta
+
+    
     //ComponentDidMount
     useEffect(
         (e) => {
+            //me traigo los perros y los temperamentos cuando el componente se monta
             dispatch(getAllDogs());
             dispatch(getTemperaments());
         },
@@ -48,7 +54,8 @@ export default function Home() {
 
     function handleClick(e) {
         e.preventDefault();
-        dispatch(getAllDogs()); //resetea cuando hace el click
+        dispatch(getAllDogs()); //vuleve a cargar los perros cuando hace el click
+        window.location.reload(); // recargar la pagina
     }
 
     function handleSort(e) {
@@ -65,13 +72,12 @@ export default function Home() {
     function handleFilterbyDbApi(e) {
         dispatch(filterByDbApi(e.target.value));
     }
-    
-    function handleSortByWeight(e){
-        e.preventDefault();
-        dispatch(orderByWeight(e.target.value))
-        setCurrentPg(1)
-        setOrden(`Sorted${e.target.value}`);
 
+    function handleSortByWeight(e) {
+        e.preventDefault();
+        dispatch(orderByWeight(e.target.value));
+        setCurrentPg(1);
+        setOrden(`Sorted${e.target.value}`);
     }
 
     return (
@@ -113,11 +119,13 @@ export default function Home() {
                 </select>
             </div>
             <div className={styles.contweight}>
-                <select htmlFor='select'
-                className={styles.weight}
-                onChange={e=> handleSortByWeight(e)}>
-               <option value='ascWeight'> weight ↑</option>
-               <option value='descWeight'> weight ↓</option>
+                <select
+                    htmlFor="select"
+                    className={styles.weight}
+                    onChange={(e) => handleSortByWeight(e)}
+                >
+                    <option value="ascWeight"> weight ↑</option>
+                    <option value="descWeight"> weight ↓</option>
                 </select>
             </div>
 
@@ -144,18 +152,10 @@ export default function Home() {
                                 <Card
                                     name={el.name}
                                     img={el.img}
-                                    temperament={
-                                        el.temperament
-                                            ? el.temperament
-                                            : el.Temperaments?.map(
-                                                  (el) => el?.name + ", "
-                                              )
-                                            ? el.Temperaments?.map(
-                                                  (el) => el?.name + ", "
-                                              )
-                                            : "unknown temperament"
+                                    temperament={el.temperament}
+                                    weight={
+                                        el?.weight_min + "-" + el?.weight_max
                                     }
-                                    weight={ el?.weight_min + "-"+ el?.weight_max}
                                     key={el.id}
                                 />
                             </Link>

@@ -3,12 +3,14 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getTemperaments, createDog } from "../actions";
 import styles from "./styles/CreateDog.module.css";
+// import perrito from "./images/perrito.jpg";
+// import style from "./styles/Modal.module.css";
 
 function validate(input) {
     let errors = {};
     if (!input.name || !/^[A-Z]+[A-Za-z0-9\s]+$/g.test(input.name)) {
         errors.name =
-            "Insert first letter in uppercase, only letters and numbers";
+            "Insert first letter in uppercase";
     }
     if (!input.weight_min || !/^[1-9]\d*(\.\d+)?$/.test(input.weight_min)) {
         errors.weight_min = "Min value must be a number, comma is not allow";
@@ -37,9 +39,9 @@ function validate(input) {
     if (input.temperament.length <= 2) {
         errors.temperament = "Requiered at least 3 temperaments";
     }
-    if (!input.life_span || !/^[1-9]\d*(\.\d+)?$/.test(input.life_span)) {
+    if (!input.life_span || !/^[A-Za-z0-9\s]+$/.test(input.life_span)) {
         errors.life_span =
-            "Life span value must be numbers, comma is not allow";
+            "Life span can be numbers and letters";
     }
     return errors;
 }
@@ -47,10 +49,13 @@ function validate(input) {
 export default function CreateDog() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const temperaments = useSelector((state) => state.temperaments);
-    console.log("temperaments", temperaments);
 
-    const [errors, setErrors] = useState({});
+    const temperaments = useSelector((state) => state.temperaments); //ME TRAIGO EL ESTADO 
+    // console.log("temperaments", temperaments);
+
+    const [errors, setErrors] = useState({}); //SETEO UN ESTADO PARA LOS ERRORES
+
+    //  Model states
 
     const [input, setInput] = useState({
         img: "",
@@ -62,12 +67,16 @@ export default function CreateDog() {
         height_min: "",
         life_span: "",
     });
-
-    useEffect(() => {
+  
+    //Component did Mount
+    useEffect(() => { 
         dispatch(getTemperaments());
     }, [dispatch]);
 
-    function handleChange(e) {
+
+
+  
+    function handleChange(e) { //SE MODIFICA MI ESTADO INPUT CON LO QUE ME PASAN POR INPUT EN EL FORM 
         setInput({
             ...input,
             [e.target.name]: e.target.value,
@@ -81,34 +90,37 @@ export default function CreateDog() {
         console.log(input);
     }
 
-    function handleSelect(e) {
+
+    function handleSelect(e) { 
+       
         setInput({
             ...input,
-            temperament: [...input.temperament, e.target.value],
+            temperament: [...input.temperament, e.target.value], // se agrega el temperamento seleccionado al array de temperamentos
         });
     }
     function handleDelete(el) {
+        debugger
         setInput({
             ...input,
-            temperament: input.temperament.filter((e) => e !== el),
+            temperament: input.temperament.filter((e) => e !== el), // hago un filtrado para eliminar el temperamento seleccionado del array de temperamentos
         });
     }
-    const ErroresValidacion=()=>{
-        debugger
-            if(!input.weight_min) {alert("Min weight must be completed"); return false;}
-            if(!input.name) {alert("Name must be completed"); return false;}
-            if(!input.weight_max) {alert("Max weight must be completed"); return false;}
-            if(!input.height_min) {alert("Min height must be completed"); return false;}
-            if(!input.height_max) {alert("Max height must be completed"); return false;}
-            if(!input.temperament) {alert("Must have at least 3 temperaments"); return false;}
-            if(!input.life_span) {alert("Life span must be completed"); return false;}
-            return true;
-          }
 
+    // VALIDACION 
+    const ErroresValidacion = () => {
+        debugger;
+        if(!input.name || !input.weight_max || !input.weight_min || !input.height_min || !input.height_max || !input.temperament || !input.life_span){
+            alert("All fields must be completed");
+            return false;
+        }
+       
+        return true;
+    };
     function handleSubmit(e) {
+        debugger
         e.preventDefault();
         // console.log("input", input);
-        if(ErroresValidacion()){
+        if (ErroresValidacion()) {
             if (
                 Object.keys(errors).length === 0 &&
                 input.name !== "" &&
@@ -122,6 +134,7 @@ export default function CreateDog() {
             )
                 dispatch(createDog(input));
             alert("Dog created successfully");
+            debugger
             setInput({
                 img: "",
                 name: "",
@@ -132,18 +145,28 @@ export default function CreateDog() {
                 height_min: "",
                 life_span: "",
             });
+            debugger
             history.push("/home");
         }
-        
     }
+
+    //MODAL
+    // const [modal, setModal] = useState(false);
+
+    // const toggleModal = () => {
+    //     setModal(!modal);
+    // };
 
     return (
         <div>
             <form
                 className={styles.contenedor}
-                onSubmit={(e) => handleSubmit(e)}
-            >
+                onSubmit={(e) => handleSubmit(e)} >
+
                 <h1 className={styles.titulo}>Create your dog!</h1>
+                
+                <div className={styles.todo}> 
+                        {/* IMAGEN */}
                 <div className={styles.image}>
                     <label>Image: </label>
                     <input
@@ -157,6 +180,7 @@ export default function CreateDog() {
                     {errors.img && <p className={styles.error}>{errors.img}</p>}
                 </div>
 
+                            {/* NAME */}
                 <div className={styles.name}>
                     <label>Name: </label>
                     <input
@@ -166,51 +190,16 @@ export default function CreateDog() {
                         name="name"
                         placeholder="Complete with a name!"
                         onChange={(e) => handleChange(e)}
-                        required
-                        className={styles.inputImage && styles.danger}
+
+                        className={ styles.danger}
                     />
                     {errors.name && (
                         <p className={styles.error}>{errors.name}</p>
                     )}
                 </div>
 
-                <div>
-                    <label
-                        className={styles.temperament}
-                        htmlFor="temperaments"
-                    >
-                        {" "}
-                        Temperaments:{" "}
-                    </label>
-                    <select
-                        className={styles.inputImage}
-                        onChange={(e) => handleSelect(e)}
-                    >
-                        {temperaments.map((temp) => (
-                            <option value={temp.name} key={temp.id}>
-                                {temp.name}
-                            </option>
-                        ))}
-                    </select>
-                    <ul>
-                        <li>
-                            {input.temperament.map((el) => (
-                                <button
-                                    type="button"
-                                    key={el.id}
-                                    className={styles.danger}
-                                    onClick={() => handleDelete(el)}
-                                >
-                                    <li className={styles.li}>{el + ", "}</li>
-                                </button>
-                            ))}
-                        </li>
-                    </ul>
-                    {errors.temperament && (
-                        <p className={styles.error}>{errors.temperament}</p>
-                    )}
-                </div>
 
+                                     {/* WEIGHT */}
                 <div>
                     <label className={styles.weight}>Max weight:</label>
                     <input
@@ -218,10 +207,11 @@ export default function CreateDog() {
                         value={input.weight}
                         name="weight_max"
                         onChange={(e) => handleChange(e)}
-                        placeholder=" max weight"
-                        className={styles.inputImage && styles.danger}
+                        placeholder=" kg"
+                        className={ styles.danger}
+                        
                     />
-                    Kgs
+                    
                     {errors.weight_max && (
                         <p className={styles.error}>{errors.weight_max}</p>
                     )}
@@ -233,15 +223,15 @@ export default function CreateDog() {
                         value={input.weight}
                         name="weight_min"
                         onChange={(e) => handleChange(e)}
-                        placeholder=" min weight"
-                        className={styles.inputImage && styles.danger}
+                        placeholder=" kg"
+                        className={ styles.danger}
                     />
-                    Kgs
                     {errors.weight_min && (
                         <p className={styles.error}>{errors.weight_min}</p>
                     )}
                 </div>
 
+                                    {/* HEIGHT */}
                 <div>
                     <label className={styles.height}>Max height:</label>
                     <input
@@ -250,7 +240,7 @@ export default function CreateDog() {
                         name="height_max"
                         onChange={(e) => handleChange(e)}
                         placeholder=" max height"
-                        className={styles.inputImage && styles.danger}
+                        className={ styles.danger}
                     />
                     {errors.height && (
                         <p className={styles.error}>{errors.height_max}</p>
@@ -264,13 +254,53 @@ export default function CreateDog() {
                         name="height_min"
                         onChange={(e) => handleChange(e)}
                         placeholder=" min height"
-                        className={styles.inputImage && styles.danger}
+                        className={ styles.danger}
                     />
                     {errors.height && (
                         <p className={styles.error}>{errors.height_min}</p>
                     )}
                 </div>
+                
+                                {/* TEMPERAMENTS */}
+                                <div>
+                    <label
+                        className={styles.temperament}
+                        htmlFor="temperaments"
+                    >
+                        Temperaments:{" "}
+                    </label>
+                    <select
+                        className={styles.inputTemp}
+                        onChange={(e) => handleSelect(e)}
+                    >
+                        {temperaments.map((temp) => (
+                            <option value={temp.name} key={temp.id}>
+                                {temp.name}
+                            </option>
+                        ))}
+                    </select>
+                    <ul className={styles.ul}>
+                        <li>
+                            {/* muestra los temperamentos seleccionados */}
+                            {input.temperament.map((el) => (
+                                <button
+                                    type="button"
+                                    key={el.id}
+                                    className={styles.danger}
+                                    onClick={() => handleDelete(el)}
+                                    
+                                >
+                                    <li className={styles.li}>{el + ", "}</li>
+                                </button>
+                            ))}
+                        </li>
+                    </ul>
+                    {errors.temperament && (
+                        <p className={styles.error}>{errors.temperament}</p>
+                    )}
+                </div>
 
+                                {/* LIFE SPAN */}
                 <div>
                     <label className={styles.life_span}>Life span:</label>
                     <input
@@ -278,28 +308,67 @@ export default function CreateDog() {
                         value={input.life_span}
                         name="life_span"
                         onChange={(e) => handleChange(e)}
-                        className={styles.inputImage && styles.danger}
+                        className={styles.danger}
                     />
-                    Years
                     {errors.life_span && (
-                        <p className={styles.danger && styles.error}>
-                            {errors.life_span}
-                        </p>
+                        <p className={styles.error}>{errors.life_span} </p>
                     )}
+                    </div>
+                    
                 </div>
                 {!errors.name &&
                 !errors.height_max &&
                 !errors.height_min &&
                 !errors.weight_max &&
                 !errors.weight_min &&
-                !errors.life_span ? ( 
-                    <button className={styles.boton} type="submit">
-                        Create new dog
-                    </button>
+                !errors.life_span ? (
+                   
+                        <button
+                            // onClick={toggleModal}
+                            className={styles.boton}
+                            type="submit">
+                            Create new dog
+                        </button> 
+                   
+                       
                 ) : (
                     <p className={styles.p}> All fields must be completed </p>
                 )}
             </form>
+            {/* <>
+                {errors.name &&
+                errors.height_max &&
+                errors.height_min &&
+                errors.weight_max &&
+                errors.weight_min &&
+                errors.life_span ? null : modal && (
+                    <div className={style.modal}>
+                        <div className={style.overlay}>
+                            <div className={style.content}>
+                                <button
+                                    className={style.close}
+                                    onClick={toggleModal}
+                                >
+                                    x
+                                </button>
+                                <img
+                                    src={perrito}
+                                    alt=""
+                                    className={style.img}
+                                />
+                                <div className={style.modal_textos}>
+                                    <h2>Your dog was created successfully!</h2>
+                                    <p>
+                                        Now go check out your dog at the home
+                                        page.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </> */}
+          
         </div>
     );
 }

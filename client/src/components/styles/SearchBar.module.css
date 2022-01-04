@@ -42,10 +42,10 @@
     height: fit-content;
     position: relative;
     margin-left: 200px;
-    margin-top: 20px;
+    margin-top: 40px;
   }
   .input_search{
-    height: 50px;
+    height: 40px;
     width: 50px;
     border-style: none;
     padding: 10px;

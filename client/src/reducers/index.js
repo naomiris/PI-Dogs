@@ -41,7 +41,7 @@ function rootReducer(state = initialState, action) {
       case 'FILTER_BY_DBAPI':
           const createdFilter = action.payload ==='Created' ? state.allDogs.filter(el => el.createdInDb) : 
           state.allDogs.filter(el => !el.createdInDb)
-          console.log('aca',createdFilter)
+          console.log('filtrocreate',createdFilter)
           return{
               ...state,
               dogs: createdFilter

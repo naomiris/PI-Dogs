@@ -43,7 +43,7 @@ module.exports = (sequelize) => {
     img: {
       type: DataTypes.STRING,
       allowNull: true,
-      defaultValue: 'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg'
+      defaultValue: 'https://i.guim.co.uk/img/media/684c9d087dab923db1ce4057903f03293b07deac/205_132_1915_1150/master/1915.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=7e721515d367091c62d877ebd2529731'
     },
     createdInDb: {
       type: DataTypes.BOOLEAN,

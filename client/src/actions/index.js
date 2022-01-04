@@ -1,6 +1,8 @@
 import axios from "axios";
 
-export function getAllDogs() {
+
+//Me traigo todos los perros y los dispacho
+export function getAllDogs() {   
   return async function (dispatch) {
     const jsonInfo = await axios.get("http://localhost:3005/dogs");
     console.log("todos", jsonInfo)
@@ -12,22 +14,19 @@ export function getAllDogs() {
 }
 export function getDogsName(name) {
   return async function (dispatch) {
-    // try {
-    //   var dogsByName = await axios.get(
-    //     "http://localhost:3005/dogs?name=" + name
-    //     );
+    try {
+      let dogsByName = await axios.get(
+        "http://localhost:3005/dogs?name=" + name
+        );
        
-    //   return dispatch({
-    //     type: "GET_NAME_DOGS",
-    //     payload: dogsByName.data,
-    //   });
-    // } catch (error) {
-    //   alert("name does not exist in data base, create a dog" + error);
-    // }
-    return dispatch({
+      return dispatch({
         type: "GET_NAME_DOGS",
-        payload: name
-    })
+        payload: dogsByName.data,
+      });
+    } catch (error) {
+      alert("name does not exist in data base, create a dog" + error);
+    }
+  
   };
 }
 export function getTemperaments() {
