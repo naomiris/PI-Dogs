@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,10 +20,15 @@ export default function Home() {
     const dispatch = useDispatch(); // HOOK que reemplaza mapDispatchToProps, creo una instancia de la funcion 
  
 //  ME TRAIGO LOS ESTADOS GLOBALES QUE SE NECESITAN EN ESTE COMPONENTE
-    const allDogs = useSelector((state) => state.dogs); // me traigo el arreglo del estado del reducer
+    const allDogs = useSelector((state) => state.dogs); 
     console.log(allDogs);
     
     const temperaments = useSelector((state) => state.temperaments);
+
+    const dogsBreed = useSelector((state) => state.dogsBreed);
+    console.log("breed",dogsBreed)
+
+
 
 
 // PAGINADO
@@ -45,7 +51,6 @@ export default function Home() {
     //ComponentDidMount
     useEffect(
         (e) => {
-            //me traigo los perros y los temperamentos cuando el componente se monta
             dispatch(getAllDogs());
             dispatch(getTemperaments());
         },
@@ -54,8 +59,8 @@ export default function Home() {
 
     function handleClick(e) {
         e.preventDefault();
-        dispatch(getAllDogs()); //vuleve a cargar los perros cuando hace el click
-        window.location.reload(); // recargar la pagina
+        dispatch(getAllDogs());
+        window.location.reload();
     }
 
     function handleSort(e) {
@@ -77,7 +82,7 @@ export default function Home() {
         e.preventDefault();
         dispatch(orderByWeight(e.target.value));
         setCurrentPg(1);
-        setOrden(`Sorted${e.target.value}`);
+        setOrden(alert( `Sorted ${e.target.value}`));
     }
 
     return (

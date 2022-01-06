@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './styles/Paginado.module.css';
-import {connect} from 'react-redux'
+
 
 export default function Paginado ({dogsPerPg, allDogs, paginado}){ // me traigo como props el estado que renderiza cuantos perros quiero por pagina, todos los perros y la constante paginado 
     const pageNumber = []; //va a ser un arreglo de numeros con el resultado del for
@@ -13,7 +13,7 @@ export default function Paginado ({dogsPerPg, allDogs, paginado}){ // me traigo 
             <div>
             <ul className={styles.paginado}>
                 {
-                    pageNumber && pageNumber.map(num =>(
+                   pageNumber?.map(num =>(
                         <li className={styles.number} key={num}>
                         <a href={paginado} onClick={()=> paginado(num)}>{num}</a>
                         </li>

@@ -40,6 +40,7 @@ export default function SearchBar() {
                 className={styles.input_search}
                 placeholder="Search dog..."
                 onChange={handleInputChange}
+                value={name}
             ></input>
         </div>
     );

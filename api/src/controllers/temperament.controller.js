@@ -12,7 +12,6 @@ const dogsTemperament = async (req, res) => {
             `https://api.thedogapi.com/v1/breeds?apikey=${DB_API_KEY}`
         );
         //   console.log("temperamentApi",temperamentApi);
-        //hago un mapeo de los temperamentos traidos de la api y se guardan en una variable
         const hasTemperament = temperamentApi.data.map((d) =>
             d.temperament ? d.temperament : "Has not temperaments"
         );
