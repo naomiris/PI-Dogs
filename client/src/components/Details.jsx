@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { dogDetail } from "../actions";
+import { dogDetail, getClean } from "../actions";
 import { useParams } from "react-router";
 import styles from "./styles/Detail.module.css";
 
@@ -15,16 +15,19 @@ export default function Detail(props) {
     console.log("dogdetalle", dogDetalle);
     useEffect(() => {
         dispatch(dogDetail(id));
+        return () => {dispatch(getClean())}
     }, [dispatch, id]);
 
     return (
         <>
-            <div>
                 {dogDetalle.length > 0 ? (
                     <div className={styles.container}>
+                            <Link to="/home">
+                    <button className={styles.button}>Back Home</button>
+                </Link>
                         <div className={styles.name}>
                             <h1>I'm {dogDetalle[0].name}</h1>
-
+                            </div>
                             <img
                                 src={
                                     dogDetalle[0]?.img? dogDetalle[0]?.img : dogDetalle[0]?.image
@@ -33,7 +36,7 @@ export default function Detail(props) {
                                 width="350px"
                                 height="350px"
                             />
-                        </div>
+                            <div className={styles.cont}>
                         <div className={styles.temp}>
                             <span>
                                 My temperaments are:{" "}
@@ -60,13 +63,11 @@ export default function Detail(props) {
                             </span>
                         </div>
                     </div>
+                    </div>
                 ) : (
-                    <p>Loading...</p>
-                )}
-                <Link to="/home">
-                    <button className={styles.button}>Back Home</button>
-                </Link>
-            </div>
+                    <div className={styles.loading}></div>
+                    )}
+                
         </>
     );
 }

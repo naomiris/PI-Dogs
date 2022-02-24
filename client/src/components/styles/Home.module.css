@@ -5,24 +5,29 @@
     text-align: center;
     margin: auto;
     
+    
   }
   .dogsGrid{
       display: grid;
       grid-template-columns: repeat(auto-fill, 300px);
-      gap: 15px;
-      
+      gap: -10px;
       justify-content: center;
-    
+      background: radial-gradient(circle at 10% 20%, rgb(178, 178, 212) 0%, rgb(253, 222, 249) 79.5%);
+      border: 1px solid transparent;
+      border-radius: 60px;
+      /* width: 200vh; */
+      max-width: 200vh;  
+      margin: auto;
   }
   
-  @media (max-width: 560px){
-      .dogsGrid {  grid-template-columns: 80%;
+  /* @media (max-width: 560px){
+      .dogsGrid {  grid-template-columns: 50%;
         }
- }
+ } */
 
  .temperamento{
     display: flex;
-    border: 1px solid #c79c9c;
+    border: 1px solid transparent;
     border-radius: 15px;
     padding: 5px;
     background-color: #c79c9c;
@@ -30,42 +35,19 @@
     cursor: pointer;
    
  }
- .contenedor{
-     display: flex;
-     justify-content: space-between;
-     margin-top: -28px;
-    margin-left: 990px;
-    align-items: center;
-  
- }
 
- .orden{
-     margin-right:-450px ;
-     border: 1px solid #c79c9c;
+ .ordenAlpha{
+     border: 1px solid transparent;
      border-radius: 15px;
      padding: 5px;
      width: 70px;
      background-color: #c79c9c;
      color: white;
-     cursor: pointer;
-     
-    
-     
+     cursor: pointer;  
  }
-.contenedor2{
-    margin-left: 411px;
-  align-items: center;
-  margin-top: -27px
-  
-}
-.contweight{
-    margin-left: 511px;
-    align-items: center;
-    margin-top: 20px
-}
+
 .weight{
-    margin-right:-150px ;
-     border: 1px solid #c79c9c;
+     border: 1px solid transparent;
      border-radius: 15px;
      padding: 5px;
      width: 76px;
@@ -74,14 +56,14 @@
      cursor: pointer;
 }
 .button{
-   
     justify-content: center;
-    border: 1px solid black;
+    border: 1px solid transparent;
     border-radius: 15px;
     padding: 5px;
     background-color: #c79c9c;
     color: white;
     cursor: pointer;
+    margin: 1rem;
     
 }
 .button:hover{
@@ -90,23 +72,132 @@
     color: white;
 
 }
-.conteButton{
- display: flex;
- justify-content: center;
- margin-top: -40px;
- margin-left: 430px;
-}
-.all{
-    border: 1px solid black; 
+
+/* .temperamento{
+    display: flex;
+    border: 1px solid transparent; 
     border-radius: 15px;   
     padding: 5px;
     background-color: #c79c9c;
     color: white;
     cursor: pointer;
     
+} */
+.sorting{
+    position: relative;
+  display: inline-block;
+ 
 }
-.conteAll{
-    margin-top: -27px;
-    margin-left: 610px;
+.divsearch {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    /* display: none; */
+  }
+  .burbuja{
+      display: flex;
+      margin-top: 10px;
+      border: 1px solid transparent;
+      background: radial-gradient(circle at 10% 20%, rgb(178, 178, 212) 0%, rgb(253, 222, 249) 79.5%);
+      border-radius: 50px;
+      height: 5rem; 
+      padding: 5px;
+      max-width: 200vh; 
+      margin: auto;
+      justify-content: center;
+      /* width: 100vw; */
+    
+      
+  }
+.sortsfilterdiv {
+    border-radius: 5px;
+    display: flex;
+    height: 4rem;
+    align-items: center;
+    margin: 0px 30px;
+  }
+  
+.select {
+    border-radius: 15px;
+    padding: 4px;
+    background-color: #c79c9c;
+    border: none;
+    height: 2rem;
+    margin-right: 20px;
+    color: white;
+    cursor: pointer;
+  }
+
+.loading{
+    display: flex;
+    justify-content: flex-end;
+    
 }
+.loading::after{
+    content: "";
+    width: 50px;
+    height: 50px;
+    border: 10px solid white;
+    border-top-color:  #c79c9c;
+    border-radius: 50%;
+    animation: loading 1s linear infinite;
+}
+@keyframes loading {
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+@media screen and (max-width: 930px) {
+    .leftdiv {
+        flex-direction: column;
+        font-size: 15px;
+        height: 120px;
+      }
+      .sortsfilterdiv {
+        margin: auto;
+      }
+      .temperamento {
+        height: 2rem;
+      }
+      .divsearch {
+        margin: 0px;
+        display: flex;
+        justify-content: center;
+      }
+      .burbuja{
+        flex-direction: column;
+        font-size: 15px;
+        height: 160px;
+     }
+     
+}
+@media screen and (max-width: 552px) {
+    .leftdiv {
+        flex-direction: column;
+        font-size: 15px;
+        /* height: 120px; */
+      }
+      .sortsfilterdiv {
+        margin: auto;
+       
+      }
+      .temperamento {
+        height: 2rem;
+      }
+      .divsearch {
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+        
+      }
+     .burbuja{
+        flex-direction: column;
+        align-content: center;
+        font-size: 15px;
+        height: 160px;
+     }
+     
+}
+
  

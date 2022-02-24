@@ -17,7 +17,7 @@ export default function NavBar (){
                 <h1 className={styles.doggy}>Doggy App</h1>
                 </Link>
                 <div>
-                <Link to='/dog'><h1 className={styles.createdog}>Create your dog!</h1></Link>
+                <Link to='/dog'><h1 className={styles.createdog}>Create your dog</h1></Link>
                 </div>
                 </div>
             </nav>

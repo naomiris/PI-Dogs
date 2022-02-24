@@ -24,7 +24,7 @@ export function getDogsName(name) {
         payload: dogsByName.data,
       });
     } catch (error) {
-      alert("name does not exist in data base, create a dog" + error);
+     console.log(error)
     }
   
   };
@@ -83,6 +83,11 @@ export function orderByWeight(payload){
     return {
         type: 'ORDER_BY_WEIGHT',
         payload
+    }
+}
+export function getClean (){
+    return {
+       type: "GET_CLEAN"
     }
 }
 

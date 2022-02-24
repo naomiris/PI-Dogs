@@ -110,7 +110,11 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 dogs: array,
             };
-
+         case "GET_CLEAN":
+             return{
+                 ...state,
+                 dogsDetail:[],
+             }
         default:
             return state;
     }

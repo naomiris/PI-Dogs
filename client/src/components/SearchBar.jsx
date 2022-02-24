@@ -3,10 +3,11 @@ import { useDispatch } from "react-redux";
 import { getDogsName } from "../actions/index";
 import styles from "./styles/SearchBar.module.css";
 import { AiOutlineSearch } from "react-icons/ai";
+import swal from 'sweetalert';
 
 export default function SearchBar() {
     const dispatch = useDispatch();
-    const [name, setName] = useState(""); //estado local el cual va a ir tomando los valores del e.target.value(lo que se escribe en el input) con la funcion handlechange
+    const [name, setName] = useState(""); 
 
     function handleInputChange(e) {
         e.preventDefault();
@@ -21,7 +22,7 @@ export default function SearchBar() {
             dispatch(getDogsName(name));
             setName("");
         } else {
-            alert("Insert a correct name to search");
+            swal("Insert a correct name to search");
         }
     }
 

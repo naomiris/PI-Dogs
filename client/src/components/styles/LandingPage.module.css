@@ -1,6 +1,6 @@
 .background {
-   /* background-image: url("https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500") ; */
-   background-image: url('C:\Users\naomi\OneDrive\Desktop\PI-Dogs-main\client\src\components\images\perroblanco.webp');
+   background-image: url("https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500") ;
+   /* background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fes.123rf.com%2Fphoto_89195848_fondo-transparente-de-vector-con-dise%25C3%25B1o-plano-del-icono-de-perros.html&psig=AOvVaw1G74Te3AajGpR4fNN2uAXW&ust=1641662458253000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCODApOeToPUCFQAAAAAdAAAAABAV'); */
    position: fixed;
    height:100%;
    width: 100%;
@@ -9,14 +9,7 @@
    background-attachment: fixed;
 
   }
- .imagen{
-    display: flex;
-    justify-content: center;
-    margin-left: 580px;
-    margin-top: -30px; 
-    width: 150px;
-    height: 170px;
-   } 
+  
  
  @import url('https://fonts.googleapis.com/css2?family=Moo+Lah+Lah&display=swap');
  .doggy{
@@ -24,3 +17,8 @@
     font-size: 100px;
     cursor: default;
    }
+
+.patita{
+    color: black;
+    margin: 3rem;
+}

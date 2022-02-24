@@ -17,37 +17,30 @@ import SearchBar from "./SearchBar.jsx";
 import styles from "./styles/Home.module.css";
 
 export default function Home() {
-    const dispatch = useDispatch(); // HOOK que reemplaza mapDispatchToProps, creo una instancia de la funcion 
- 
-//  ME TRAIGO LOS ESTADOS GLOBALES QUE SE NECESITAN EN ESTE COMPONENTE
-    const allDogs = useSelector((state) => state.dogs); 
+    const dispatch = useDispatch(); // HOOK
+
+    const allDogs = useSelector((state) => state.dogs);
     console.log(allDogs);
-    
+
     const temperaments = useSelector((state) => state.temperaments);
 
     const dogsBreed = useSelector((state) => state.dogsBreed);
-    console.log("breed",dogsBreed)
+    console.log("breed", dogsBreed);
 
-
-
-
-// PAGINADO
+    // PAGINADO
     const [orden, setOrden] = useState("");
-    const [currentPg, setCurrentPg] = useState(1); // me guarda en un estado local la pagina actual, va a ser 1
-    const [dogsPerPg, setDogsPerPg] = useState(8); // me guardo en un estado local cuantos perros por pagina
+    const [currentPg, setCurrentPg] = useState(1); //  la pagina actual, va a ser 1
+    const [dogsPerPg, setDogsPerPg] = useState(8);
     const numberOfLastDog = currentPg * dogsPerPg; // 8
     const numberOfFirstDog = numberOfLastDog - dogsPerPg; // 0
-    const currentDogs = allDogs.slice(numberOfFirstDog, numberOfLastDog); // me devuelve un arreglo desde el primer perro hasta el ultimo que seria el 6to en la primera pag, esto va a cambiar dependiendo de la pagina en el que este
-    //slice: de un arreglo toma una porcion de ese arreglo dependiendo de lo que se le pasa por paramentro
+    const currentDogs = allDogs.slice(numberOfFirstDog, numberOfLastDog);
     // console.log("aca", currentDogs);
 
-//PAGINA ACTUAL
+    //PAGINA ACTUAL
     const paginado = (pageNum) => {
         setCurrentPg(pageNum); // el paginado va a ir seteando la pagina en el numero que yo vaya apretando
     };
 
-
-    
     //ComponentDidMount
     useEffect(
         (e) => {
@@ -71,7 +64,7 @@ export default function Home() {
     }
 
     function handleFilterTemperament(e) {
-        dispatch(filterDogsByTemperaments(e.target.value)); //el e.target.value va a ser el valor del value{temp.name}
+        dispatch(filterDogsByTemperaments(e.target.value));
     }
 
     function handleFilterbyDbApi(e) {
@@ -82,13 +75,32 @@ export default function Home() {
         e.preventDefault();
         dispatch(orderByWeight(e.target.value));
         setCurrentPg(1);
-        setOrden(alert( `Sorted ${e.target.value}`));
+        setOrden(`Sorted${e.target.value}`);
     }
 
     return (
-        <div>
-            <SearchBar />
-            <div className={styles.conteButton}>
+        <>
+            <div className={styles.burbuja}>
+                <div className={styles.sortsfilterdiv}>
+                <label htmlFor="select" className={styles.sorting}>
+                <select
+                    className={styles.ordenAlpha}
+                    onChange={(e) => handleSort(e)}
+                >
+                    <option value="asc">A-Z</option>
+                    <option value="desc">Z-A</option>
+                </select>
+                </label>
+                <label htmlFor="select" className={styles.sorting}>
+                <select
+                    htmlFor="select"
+                    className={styles.weight}
+                    onChange={(e) => handleSortByWeight(e)}
+                >
+                    <option value="ascWeight"> weight ↑</option>
+                    <option value="descWeight"> weight ↓</option>
+                </select>
+                </label>
                 <button
                     className={styles.button}
                     onClick={(e) => {
@@ -97,12 +109,11 @@ export default function Home() {
                 >
                     Reload dogs
                 </button>
-            </div>
-
-            <div className={styles.contenedor}>
+                </div>
+                    <div className={styles.sortsfilterdiv}>
                 <select
                     htmlFor="select"
-                    className={styles.temperamento}
+                    className={styles.select }
                     onChange={(e) => handleFilterTemperament(e)}
                 >
                     <option value="Temperaments">Temperaments</option>
@@ -112,62 +123,53 @@ export default function Home() {
                         </option>
                     ))}
                 </select>
-            </div>
-            <div className={styles.conteAll}>
+
                 <select
-                    className={styles.all}
+                    className={styles.select}
                     onChange={(e) => handleFilterbyDbApi(e)}
                 >
                     <option value="All">All</option>
                     <option value="Created">Created</option>
                     <option value="Existing">Existing</option>
                 </select>
+                </div>
+            <div className={styles.divsearch}>
+            <SearchBar />
             </div>
-            <div className={styles.contweight}>
-                <select
-                    htmlFor="select"
-                    className={styles.weight}
-                    onChange={(e) => handleSortByWeight(e)}
-                >
-                    <option value="ascWeight"> weight ↑</option>
-                    <option value="descWeight"> weight ↓</option>
-                </select>
             </div>
 
-            <div className={styles.contenedor2}>
-                <label htmlFor="select"> </label>
-                <select
-                    className={styles.orden}
-                    onChange={(e) => handleSort(e)}
-                >
-                    <option value="asc">A-Z</option>
-                    <option value="desc">Z-A</option>
-                </select>
-            </div>
+              
             <Paginado // son las props que necesita el componente paginado
-                dogsPerPg={dogsPerPg} //le paso el estado local
-                allDogs={allDogs.length} //si tiene algo el arreglo de alldogs
+                dogsPerPg={dogsPerPg}
+                allDogs={allDogs.length}
                 paginado={paginado}
             />
+            {/* Renderizado de las cards */}
             <div className={styles.dogsCard}>
                 <ul className={styles.dogsGrid}>
-                    {currentDogs?.map((el) => (
-                        <div key={el.id}>
-                            <Link to={"/dogs/" + el.id}>
-                                <Card
-                                    name={el.name}
-                                    img={el.img}
-                                    temperament={el.temperament}
-                                    weight={
-                                        el?.weight_min + "-" + el?.weight_max
-                                    }
-                                    key={el.id}
-                                />
-                            </Link>
-                        </div>
-                    ))}
+                    {currentDogs.length > 0 ? (
+                        currentDogs.map((el) => (
+                            <div key={el.id}>
+                                <Link to={"/dogs/" + el.id}>
+                                    <Card
+                                        name={el.name}
+                                        img={el.img}
+                                        temperament={el.temperament}
+                                        weight={
+                                            el?.weight_min +
+                                            "-" +
+                                            el?.weight_max
+                                        }
+                                        key={el.id}
+                                    />
+                                </Link>
+                            </div>
+                        ))
+                    ) : (
+                        <div className={styles.loading}></div>
+                    )}
                 </ul>
             </div>
-        </div>
+        </>
     );
 }

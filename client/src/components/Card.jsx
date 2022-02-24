@@ -11,7 +11,6 @@ export default function Card ({img, name, temperament, weight}){
             <img className={styles.img} src={img} alt='img not found' width='200px' height='200px' />
             <h3 className={styles.temp}>{temperament}</h3>
             <br/>
-            {/* <h3 className={styles.weight}>weight: {weight_min}{weight_max}</h3> */}
             <h5 className={styles.weight} >Weight: {weight}</h5>
             </div>
         </div>
