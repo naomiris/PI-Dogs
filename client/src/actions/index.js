@@ -1,10 +1,10 @@
 import axios from "axios";
-
+const {REACT_APP_SERVER} = process.env;
 
 //Me traigo todos los perros y los dispacho
 export function getAllDogs() {   
   return async function (dispatch) {
-    const jsonInfo = await axios.get("http://localhost:3005/dogs");
+    const jsonInfo = await axios.get(`${REACT_APP_SERVER}/dogs`);
     console.log("todos", jsonInfo)
     return dispatch({
       type: "GET_DOGS",
@@ -16,7 +16,7 @@ export function getDogsName(name) {
   return async function (dispatch) {
     try {
       let dogsByName = await axios.get(
-        "http://localhost:3005/dogs?name=" + name
+        `${REACT_APP_SERVER}/dogs?name=` + name
         );
        
       return dispatch({
@@ -31,7 +31,7 @@ export function getDogsName(name) {
 }
 export function getTemperaments() {
   return async function (dispatch) {
-    const temperamentos = await axios.get("http://localhost:3005/temperaments");
+    const temperamentos = await axios.get(`${REACT_APP_SERVER}/temperaments`);
     console.log("temp", temperamentos);
     return dispatch({
       type: "GET_TEMPERAMENTS",
@@ -60,7 +60,7 @@ export function filterByDbApi (payload){
 }
 export function createDog(payload){
     return async function (dispatch){
-        const data = await axios.post("http://localhost:3005/dog", payload);
+        const data = await axios.post(`${REACT_APP_SERVER}/dog`, payload);
         console.log('createdog',data);
         return data;
     }
@@ -68,7 +68,7 @@ export function createDog(payload){
 export function dogDetail (id){
   return async function (dispatch){
     try{
-      const dataId = await axios.get("http://localhost:3005/dogs/" + id)
+      const dataId = await axios.get(`${REACT_APP_SERVER}/dogs/` + id)
       console.log('id',dataId);
       return dispatch({
         type: "DOG_DETAIL",
