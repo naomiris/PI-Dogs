@@ -46,15 +46,18 @@ export default function CreateDog() {
     }
 
     function handleSelect(e) {
-        if (input.temperament.includes(e.target.value)) {
-            return null;
-        } else {
-            setInput({
-                ...input,
-                temperament: [...input.temperament, e.target.value], //set
-            });
+        if(input.temperament.length < 9){
+            if (input.temperament.includes(e.target.value)) {
+                return null;
+            } else {
+                setInput({
+                    ...input,
+                    temperament: [...input.temperament, e.target.value], //set
+                });
+            }
         }
-    }
+
+        }
     function handleDelete(el) {
         setInput({
             ...input,
@@ -104,7 +107,7 @@ export default function CreateDog() {
         ) {
             errors.img = "Must be an URL or left empty for default image";
         }
-        if (input.temperament.length < 2) {
+        if (input.temperament.length < 2 || input.temperament.length >= 9) {
             errors.temperament = "Requiered at least 3 temperaments";
         }
         if (!input.life_span || !/^[A-Za-z0-9\s]+$/.test(input.life_span)) {
@@ -233,13 +236,26 @@ export default function CreateDog() {
                         <p className={styles.error}>{errors.height_max}</p>
                     )}
                 </div>
-                {/* TEMPERAMENTS */}
+                {/* LIFE SPAN */}
+                <div className={styles.inputdiv}>
+                    <input
+                        placeholder="life span"
+                        type="text"
+                        value={input.life_span}
+                        name="life_span"
+                        className={styles.life_span}
+                        onChange={(e) => handleChange(e)}
+                    />
+                    {errors.life_span && (
+                        <p className={styles.error}>{errors.life_span}</p>
+                    )}
+                </div>
                 <div className={styles.inputdiv}>
                     <select
                         className={styles.inputTemp}
                         onChange={(e) => handleSelect(e)}
                     >
-                        <option value="">-Choose three or more-</option>
+                        <option value="">-Choose three or more temperaments-</option>
                         {temperaments.map((temp) => (
                             <option value={temp.name} key={temp.id}>
                                 {temp.name}
@@ -254,7 +270,7 @@ export default function CreateDog() {
                                     <button
                                     type="button"
                                     key={el.id}
-                                    className={styles.danger}
+                                    className={styles.libutton}
                                     onClick={() => handleDelete(el)}
                                     >
                                     
@@ -271,20 +287,6 @@ export default function CreateDog() {
                             </li>
                         </ul>
                     </div>
-                </div>
-
-                {/* LIFE SPAN */}
-                <div className={styles.inputdiv}>
-                    <input
-                        placeholder="life span"
-                        type="text"
-                        value={input.life_span}
-                        name="life_span"
-                        onChange={(e) => handleChange(e)}
-                    />
-                    {errors.life_span && (
-                        <p className={styles.error}>{errors.life_span}</p>
-                    )}
                 </div>
                 {!errors.name &&
                 !errors.height_max &&

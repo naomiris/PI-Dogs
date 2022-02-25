@@ -73,11 +73,18 @@
     padding: 3px;
     background-color: rgb(235, 225, 225);
     margin-left: 2px;
+    display: flex;
+    flex-wrap: wrap;
     
 }
 .ul{
     list-style: none;
 }
+
+ .life_span{
+    margin: 2rem;
+}
+
 
 .boton{
     border: 1px solid transparent;
@@ -85,8 +92,8 @@
     width: 120px;
     padding: 10px;
     display: flex;
-    margin: 10px auto;
-    margin-top: 50px;
+    margin: 90px auto;
+    
     background-color: white;
     font-family: 'Gothic A1', sans-serif;
     cursor: pointer;
