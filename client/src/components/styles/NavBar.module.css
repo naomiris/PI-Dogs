@@ -1,7 +1,9 @@
-#perrologo {
-    margin-right: 20px;
-    /* display: flex; */  /* justify-content: flex-start; */ 
-  }
+.add{
+    color: black;
+}
+.paw{
+    color: black;
+}
 
 .home{
     /* margin-right: 20px; */
@@ -15,25 +17,9 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
-    margin-left: 55px
+    margin: 0 5rem;
 }
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap');
-.createdog{
-    font-family: 'Cormorant Garamond', serif;
-    display: flex;
-    justify-content: flex-end;
-    font-size: 16px;
-    margin-right: 65px;
-   color: black;
 
-
-}
-.createdog:hover{
-    background-color: rgb(255, 255, 255);
-    color: rgb(37, 36, 36);
-    transform: scale(1.2);
-    border-color: rgb(235, 235, 235)
-}
 @import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
 .doggy{
     color: rgb(0, 0, 0);
@@ -51,12 +37,7 @@
 
 @media screen and (max-width: 540px) {
     .nav{
-        justify-content: space-between ;
-    }
-    .createdog{
-        margin: auto;
-        display: flex;
-        flex-wrap: wrap;
+        margin: 0 1.9rem ;
     }
 }
 

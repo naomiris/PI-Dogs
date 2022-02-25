@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import perro from './images/perro.png';
 import styles from './styles/NavBar.module.css';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import PetsIcon from '@mui/icons-material/Pets';
 
 export default function NavBar (){
     return(
@@ -10,14 +11,14 @@ export default function NavBar (){
                 <div className={styles.nav}>
                 <Link to="/">
                     <div className={styles.home}>
-                <img src={perro} id="perrologo" alt="" width='60px' height='30px'/>
+                <PetsIcon fontSize="large" className={styles.paw}/>
                 </div>
                 </Link>
                 <Link to='/home'>
                 <h1 className={styles.doggy}>Doggy App</h1>
                 </Link>
                 <div>
-                <Link to='/dog'><h1 className={styles.createdog}>Create your dog</h1></Link>
+                <Link to='/dog'><AddCircleIcon fontSize="large" className={styles.add}/></Link>
                 </div>
                 </div>
             </nav>

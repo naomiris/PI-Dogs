@@ -125,18 +125,12 @@ input:valid {
     color:rgb(119, 20, 20)
     
 } 
-/* .todo{
-    display: grid;
-    grid-template-areas: "left right";
-    max-width: 500px; 
-    margin-left: 70px;
-} */
 
 @media screen and (max-width:780px) {
     .contenedor{
         width: 85vw;
         height: auto;
-
+        margin: auto;
     }
 }
 @media screen and (max-width:745px) {
