@@ -140,4 +140,25 @@ input:valid {
 
     }
 }
+@media screen and (max-width:379px) {
+    .contenedor{
+        width: fit-content;
+        height: auto;
+
+    }
+}
+@media screen and (max-width:340px) {
+    .contenedor{
+        width: auto;
+        height: auto;
+
+    }
+}
+@media screen and (max-width:280px) {
+    .contenedor{
+        width: fit-content;
+        height: auto;
+
+    }
+}
 

@@ -186,13 +186,14 @@ export default function CreateDog() {
                 </div>
                 {/* WEIGHT */}
                 <div className={styles.inputdivhalf}>
-                    <div>
+                    <div  className={styles.divinput}>
                     <input
                         type="text"
                         value={input.weight}
                         name="weight_max"
                         onChange={(e) => handleChange(e)}
                         placeholder=" kg"
+                        className={styles.divinput}
                     />
                     <input
                         type="text"
@@ -200,6 +201,7 @@ export default function CreateDog() {
                         name="weight_min"
                         onChange={(e) => handleChange(e)}
                         placeholder=" kg"
+                        className={styles.divinput}
                     />
                     </div>
                     {errors.weight_min && (
@@ -212,13 +214,14 @@ export default function CreateDog() {
 
                 {/* HEIGHT */}
                 <div className={styles.inputdivhalf}>
-                    <div>
+                    <div className={styles.divinput}>
                     <input
                         type="text"
                         value={input.height}
                         name="height_max"
                         onChange={(e) => handleChange(e)}
                         placeholder=" max height"
+                        className={styles.divinput}
                     />
 
                     <input
@@ -227,6 +230,7 @@ export default function CreateDog() {
                         name="height_min"
                         onChange={(e) => handleChange(e)}
                         placeholder=" min height"
+                        className={styles.divinput}
                     />
                     </div>
                     {errors.height_min && (
