@@ -38,7 +38,7 @@ export default function Home() {
 
     //PAGINA ACTUAL
     const paginado = (pageNum) => {
-        setCurrentPg(pageNum); // el paginado va a ir seteando la pagina en el numero que yo vaya apretando
+        setCurrentPg(pageNum); 
     };
 
     //ComponentDidMount
